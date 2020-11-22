@@ -1,0 +1,10 @@
+package Services;
+
+public class SQLConnect {
+
+	public static void main(String[] args) {
+		
+		String url = "jdbc:sqlserver://localhost:1433;databaseName=SineMovie;integratedSecurity=true";
+	}
+
+}

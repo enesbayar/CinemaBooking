@@ -1,0 +1,23 @@
+package Services;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class MovieServices implements IMovieServices {
+	SQLConnect sqlConnect = new SQLConnect();
+	Connection con = sqlConnect.connDB();
+	Statement statement = null;
+	ResultSet resultSet = null;
+	
+	public MovieServices(){
+		
+	}
+	@Override
+	public void addMovie() {
+		
+		
+	}
+
+	
+}

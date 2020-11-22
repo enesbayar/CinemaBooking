@@ -1,0 +1,60 @@
+package Model;
+import java.util.ArrayList;
+
+
+public class Movie {
+
+	private String movieName;
+	private String description;
+	private ArrayList<String> session;
+	private double movieRate;
+	private double Price;
+	public String getMovieName() {
+		return movieName;
+	}
+	
+	
+	public Movie(String movieName, String description,
+			ArrayList<String> session, double movieRate, double price) {
+		super();
+		this.movieName = movieName;
+		this.description = description;
+		this.session = session;
+		this.movieRate = movieRate;
+		Price = price;
+	}
+
+	public Movie() {
+		super();
+	}
+
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public ArrayList<String> getSession() {
+		return session;
+	}
+	public void setSession(ArrayList<String> session) {
+		this.session = session;
+	}
+	public double getMovieRate() {
+		return movieRate;
+	}
+	public void setMovieRate(double movieRate) {
+		this.movieRate = movieRate;
+	}
+	public double getPrice() {
+		return Price;
+	}
+	public void setPrice(double price) {
+		Price = price;
+	}
+	
+}

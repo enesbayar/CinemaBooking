@@ -1,0 +1,13 @@
+package Model;
+
+public class Admin {
+	private int ID;
+	private String userName;
+	private String password;
+	
+	public Admin(int ID, String userName, String password){
+		this.ID = ID;
+		this.userName = userName;
+		this.password= password;
+	}
+}

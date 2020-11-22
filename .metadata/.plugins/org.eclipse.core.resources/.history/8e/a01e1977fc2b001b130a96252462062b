@@ -1,0 +1,10 @@
+package Services;
+
+public class AdminServices implements IAdminServices {
+	
+	@Override
+	public void login() {
+		
+	}
+	
+}

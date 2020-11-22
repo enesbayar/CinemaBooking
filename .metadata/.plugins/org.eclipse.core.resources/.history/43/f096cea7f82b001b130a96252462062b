@@ -1,0 +1,6 @@
+package Services;
+
+public interface IAdminServices {
+	public static void login() {
+	}
+}

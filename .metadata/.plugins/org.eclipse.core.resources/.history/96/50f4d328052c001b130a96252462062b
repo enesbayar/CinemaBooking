@@ -1,0 +1,85 @@
+package Gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+
+import Model.Admin;
+import Services.AdminServices;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+public class AdminScreen extends JFrame {
+
+	private JPanel loginPane;
+	private JTextField txt_field_adminID;
+	private JPasswordField txt_field_adminPassword;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AdminScreen frame = new AdminScreen();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public AdminScreen() {
+		AdminServices adminService = new AdminServices();
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 800, 600);
+		loginPane = new JPanel();
+		loginPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(loginPane);
+		loginPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Kullan\u0131c\u0131 Ad\u0131 :");
+		lblNewLabel.setBounds(95, 158, 97, 32);
+		loginPane.add(lblNewLabel);
+		
+		txt_field_adminID = new JTextField();
+		txt_field_adminID.setBounds(175, 164, 86, 20);
+		loginPane.add(txt_field_adminID);
+		txt_field_adminID.setColumns(10);
+		
+		JLabel lblifre = new JLabel("\u015Eifre :");
+		lblifre.setBounds(95, 205, 97, 32);
+		loginPane.add(lblifre);
+		
+		txt_field_adminPassword = new JPasswordField();
+		txt_field_adminPassword.setBounds(175, 211, 86, 20);
+		loginPane.add(txt_field_adminPassword);
+		
+		JButton btn_signIn = new JButton("G\u0130R\u0130\u015E");
+		btn_signIn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Konsol");
+			}
+		});
+		
+		btn_signIn.setBounds(128, 269, 89, 23);
+		loginPane.add(btn_signIn);
+		
+	}
+}
