@@ -23,7 +23,7 @@ public class MovieServices implements IMovieServices {
 	@Override
 	public boolean addMovie(String movieName, String movieUrl, String description, String sessions, String movieRate, String price) {
 		
-		String query = "INSERT INTO tblMovie" + "(movieName,movieUrl,description,sessions,movieRate,price) VALUES" + "(?,?,?,?,?,?)";
+		String query = "INSERT INTO tblMovie" + "(movieName,movieUrl,description,sessions,movieRate,price) VALUES" + "(?,?,?,?,?,?,?)";
 		boolean key = false;
 		try {
 			statement = con.createStatement();
@@ -34,6 +34,7 @@ public class MovieServices implements IMovieServices {
 			preparedStatement.setString(4, sessions);
 			preparedStatement.setFloat(5, Float.parseFloat(movieRate));
 			preparedStatement.setFloat(6, Float.parseFloat(price));
+			preparedStatement.setString(7, "B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B");
 			preparedStatement.executeUpdate();
 			key = true;
 		} catch (SQLException e) {
@@ -73,7 +74,7 @@ public class MovieServices implements IMovieServices {
 			System.out.println("tablodan filmler çekiliyor");
 			while(resultSet.next()){
 				movie = new Movie(resultSet.getString("movieName"),resultSet.getString("movieUrl"),resultSet.getString("description"),
-						resultSet.getString("sessions"),resultSet.getFloat("movieRate"),resultSet.getFloat("price"));
+						resultSet.getString("sessions"),resultSet.getFloat("movieRate"),resultSet.getFloat("price"),resultSet.getString("seats"));
 				movieList.add(movie);
 				System.out.println("Filmler oluþturuldu");
 			}
