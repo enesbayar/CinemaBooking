@@ -23,7 +23,7 @@ public class MovieServices implements IMovieServices {
 	@Override
 	public boolean addMovie(String movieName, String movieUrl, String description, String sessions, String movieRate, String price) {
 		
-		String query = "INSERT INTO tblMovie" + "(movieName,movieUrl,description,sessions,movieRate,price) VALUES" + "(?,?,?,?,?,?,?)";
+		String query = "INSERT INTO tblMovie" + "(movieName,movieUrl,description,movieRate,price,sessions,seats) VALUES" + "(?,?,?,?,?,?,?)";
 		boolean key = false;
 		try {
 			statement = con.createStatement();
@@ -31,9 +31,9 @@ public class MovieServices implements IMovieServices {
 			preparedStatement.setString(1, movieName);
 			preparedStatement.setString(2, movieUrl);
 			preparedStatement.setString(3, description);
-			preparedStatement.setString(4, sessions);
-			preparedStatement.setFloat(5, Float.parseFloat(movieRate));
-			preparedStatement.setFloat(6, Float.parseFloat(price));
+			preparedStatement.setFloat(4, Float.parseFloat(movieRate));
+			preparedStatement.setFloat(5, Float.parseFloat(price));
+			preparedStatement.setString(6, sessions);
 			preparedStatement.setString(7, "B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B;B");
 			preparedStatement.executeUpdate();
 			key = true;
@@ -65,18 +65,38 @@ public class MovieServices implements IMovieServices {
 		else
 			return false;
 	}
+	
+	@Override
+	public boolean updateSeats(String newSeats, String movieName) {
+		String query = "UPDATE tblMovie SET seats = ? WHERE movieName = ?";
+		boolean key = false;
+		try {
+			preparedStatement = con.prepareStatement(query);
+			preparedStatement.setString(1, newSeats);
+			preparedStatement.setString(2, movieName);
+			preparedStatement.executeUpdate();
+			key = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(key)
+			return key;
+		else
+			return false;
+	}
+	
+	@SuppressWarnings("finally")
 	@Override
 	public ArrayList<Movie> getMoviesFromDatabase() throws SQLException {
 		Movie movie;
 		try{
 			statement = con.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM tblMovie");
-			System.out.println("tablodan filmler çekiliyor");
 			while(resultSet.next()){
 				movie = new Movie(resultSet.getString("movieName"),resultSet.getString("movieUrl"),resultSet.getString("description"),
 						resultSet.getString("sessions"),resultSet.getFloat("movieRate"),resultSet.getFloat("price"),resultSet.getString("seats"));
 				movieList.add(movie);
-				System.out.println("Filmler oluþturuldu");
 			}
 			
 		}catch(SQLException e){
@@ -88,6 +108,7 @@ public class MovieServices implements IMovieServices {
 			return movieList;
 		}
 	}
+	
 
 	
 }

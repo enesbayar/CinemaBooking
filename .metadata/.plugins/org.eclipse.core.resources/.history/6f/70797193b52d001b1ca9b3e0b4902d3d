@@ -1,0 +1,16 @@
+package Services;
+
+import Model.Movie;
+import Model.Ticket;
+
+public class TicketServices implements ITicketService{
+
+	@Override
+	public Ticket createTicket(Movie movie, int ticketAmount) {
+		Ticket ticket = new Ticket;
+		ticket.setCinemaName("SineMovie");
+		ticket.setTicketAmount();
+		return null;
+	}
+
+}

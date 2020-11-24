@@ -20,33 +20,24 @@ import javax.swing.JPasswordField;
 
 import Services.AdminServices;
 import Model.Admin;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 public class AdminScreen extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_userName;
+	private JTextField txtAdmin;
 	private JPasswordField passwordField;
 	private AdminServices adminServices;
 	private ArrayList<Admin> adminList;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AdminScreen frame = new AdminScreen();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JLabel lblWallpaper;
 
-	/**
-	 * Create the frame.
-	 */
 	public AdminScreen(){
+		setUndecorated(true);
 		adminServices = new AdminServices();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -55,37 +46,78 @@ public class AdminScreen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btn_signIn = new JButton("Giri\u015F");
-		
-		btn_signIn.setBounds(124, 238, 89, 23);
-		contentPane.add(btn_signIn);
-		
 		JLabel lblNewLabel = new JLabel("Kullan\u0131c\u0131 Ad\u0131 :");
-		lblNewLabel.setBounds(59, 114, 59, 23);
+		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(71, 71, 206, 23);
 		contentPane.add(lblNewLabel);
 		
-		textField_userName = new JTextField();
-		textField_userName.setBounds(127, 115, 86, 20);
-		contentPane.add(textField_userName);
-		textField_userName.setColumns(10);
+		JSeparator separator = new JSeparator();
+		separator.setBackground(new Color(255, 255, 255));
+		separator.setForeground(new Color(255, 255, 255));
+		separator.setBounds(71, 136, 206, 1);
+		contentPane.add(separator);
 		
-		JLabel lblifre = new JLabel("\u015Eifre :");
-		lblifre.setBounds(59, 151, 59, 23);
-		contentPane.add(lblifre);
+		txtAdmin = new JTextField();
+		txtAdmin.setToolTipText("");
+		txtAdmin.setOpaque(false);
+		txtAdmin.setFont(new Font("Berlin Sans FB", Font.PLAIN, 16));
+		txtAdmin.setBorder(null);
+		txtAdmin.setForeground(new Color(192, 192, 192));
+		txtAdmin.setBounds(71, 105, 203, 33);
+		contentPane.add(txtAdmin);
+		txtAdmin.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(124, 152, 89, 20);
+		passwordField.setForeground(new Color(255, 255, 255));
+		passwordField.setBorder(null);
+		passwordField.setToolTipText("");
+		passwordField.setOpaque(false);
+		passwordField.setBounds(71, 204, 206, 23);
 		contentPane.add(passwordField);
-		btn_signIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
+		
+		JLabel lblPassword = new JLabel("Sifre :");
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
+		lblPassword.setBounds(71, 160, 203, 23);
+		contentPane.add(lblPassword);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.WHITE);
+		separator_1.setBackground(Color.WHITE);
+		separator_1.setBounds(68, 228, 206, 1);
+		contentPane.add(separator_1);
+		
+		JLabel lblSignIn = new JLabel("Giri\u015F");
+		
+		lblSignIn.setFont(new Font("Georgia", Font.BOLD, 14));
+		lblSignIn.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblSignIn.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSignIn.setForeground(new Color(255, 255, 255));
+		lblSignIn.setBounds(71, 261, 193, 33);
+		contentPane.add(lblSignIn);
+		
+		JLabel lblButton = new JLabel("");
+		lblButton.setForeground(new Color(255, 255, 255));
+		lblButton.setIcon(new ImageIcon(AdminScreen.class.getResource("/adminScreen/button.png")));
+		lblButton.setBounds(71, 261, 193, 33);
+		contentPane.add(lblButton);
+		
+		lblWallpaper = new JLabel("");
+		lblWallpaper.setIcon(new ImageIcon(AdminScreen.class.getResource("/adminScreen/wallpaper.jpg")));
+		lblWallpaper.setBounds(0, 0, 800, 600);
+		contentPane.add(lblWallpaper);
+		lblSignIn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				try {
 					adminList = adminServices.login();
-					Admin admin = new Admin(textField_userName.getText(), passwordField.getText());
+					Admin admin = new Admin(txtAdmin.getText(), passwordField.getText());
 					for(int i = 0; i<adminList.size(); i++){
 						Admin tempAdmin = new Admin(adminList.get(i).getUserName(),adminList.get(i).getPassword());
 						if(admin.getUserName().equals(tempAdmin.getUserName())&& admin.getPassword().equals(tempAdmin.getPassword())){
 							JFrame adminManagement = new AdminManagement();
+							adminManagement.setLocationRelativeTo(null);
 							adminManagement.setVisible(true);
 							dispose();
 						}
@@ -93,9 +125,9 @@ public class AdminScreen extends JFrame {
 							JOptionPane.showMessageDialog(null,"Bulunamadi");
 						}
 					}
-				} catch (SQLException e) {
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
 			}
 		});

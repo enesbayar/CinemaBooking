@@ -12,6 +12,7 @@ public class AdminServices implements IAdminServices {
 	public AdminServices(){
 		
 	}
+	@SuppressWarnings({ "finally", "unchecked" })
 	@Override
 	public ArrayList<Admin> login() throws SQLException {
 		SQLConnect sqlConnect = new SQLConnect();
@@ -23,11 +24,9 @@ public class AdminServices implements IAdminServices {
 		try{
 			statement = con.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM tblAdmin");
-			System.out.println("tablodan adminler çekiliyor");
 			while(resultSet.next()){
 				admin = new Admin(resultSet.getString("userName"), resultSet.getString("password"));
 				adminList.add(admin);
-				System.out.println("adminler oluþturuldu");
 			}
 			
 		}catch(SQLException e){

@@ -1,0 +1,9 @@
+package Services;
+
+import Model.*;
+
+public interface ITicketService {
+	
+	public Ticket createTicket(Movie movie);
+
+}
