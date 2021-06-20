@@ -1,9 +1,0 @@
-package Services;
-
-import java.util.ArrayList;
-
-import Model.Admin;
-
-public interface IAdminServices {
-	public ArrayList<Admin> login();
-}
